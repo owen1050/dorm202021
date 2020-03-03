@@ -24,6 +24,7 @@ class httpServer(BaseHTTPRequestHandler):
         postReply = ""
         
         if self.headers["RESET"] is not None:
+            postReply = "ResetAllVarsTo0"
             for x in states:
                 states[x] = 0
 
