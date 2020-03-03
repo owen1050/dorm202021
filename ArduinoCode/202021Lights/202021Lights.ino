@@ -14,8 +14,6 @@ IPAddress dns(192, 168, 212, 1);  //DNS
 
 ESP8266WebServer server(80);
 
-HTTPClient http;    //Declare object of class HTTPClient
-
 void handleRoot() {
   server.send(200, "text/plain", "hello from esp8266!");
 }
@@ -26,17 +24,16 @@ void handleNotFound() {
 
 void postReq(String head, String cont)
 {
-  WiFiClient client; 
-  const int httpPort = 23654; 
-  if (!client.connect("127.0.0.1", httpPort)) 
-  { 
-    Serial.println("connection failed"); 
-  } 
-  HTTPClient http; 
-  http.begin("127.0.0.1"); 
-  http.addHeader(head, cont); 
-  auto httpCode = http.POST("null"); 
-  http.end();
+  if(WiFi.status()== WL_CONNECTED){   //Check WiFi connection status
+   HTTPClient http;    //Declare object of class HTTPClient
+   http.begin("http://192.168.212.51:23654");      //Specify request destination
+   http.addHeader(head, cont);
+   int httpCode = http.POST("null");   //Send the request
+   http.end();  //Close connection
+   Serial.println("Reset:"+ head);
+ }else{
+    Serial.println("Error in WiFi connection");    
+ }
 }
 
 void setup() {
@@ -71,9 +68,7 @@ void setup() {
   });
 
   server.onNotFound(handleNotFound);
-
   server.begin();
-  
   Serial.println("HTTP server started");
 }
 
