@@ -14,6 +14,19 @@ class httpServer(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write("TheLocalServerIsUp".encode())
 
+    def do_POST(self):
+        self.send_response(200)
+        self.send_header('Content-type','text/plain')
+        self.end_headers()
+        postReply = ""
+
+        if self.headers["REBOOT"] is not None:
+        	postReply = "LocalServerRebooting"
+            #impliment computer reboot
+        if postReply == "":
+            postReply = "ERROR"
+        self.wfile.write(str(postReply).encode())
+
 def startStatusServer():
     httpd = HTTPServer(('', 23655), httpServer)
     print ("Starting http server on 23655")
@@ -23,7 +36,7 @@ def startStatusServer():
         httpd.shutdown()         
         print("Shutdown server") 
 
-def run():
+def maintainContactWithRemote():
     while(True):
     	r = requests.post("http://127.0.0.1:23654", headers = {"GETALL" :"null"})
     	inString = r.text
@@ -32,8 +45,13 @@ def run():
     		if(i.find("=") > 0):
     			states[i.split('=')[0]] = i.split('=')[1]
     	print(states)
-    	time.sleep(5)
+
+    	if(states["lightsOn"] == "1"):
+    		#r = requests.get("http://192.169.IPOFLIGHT/lightsOn")
+    		pass
+    	time.sleep(1)
         
 statusServer = threading.Thread(target = startStatusServer)
+remoteMaintain = threading.Thread(target = maintainContactWithRemote)
 statusServer.start()
-run()
+remoteMaintain.start()
