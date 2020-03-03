@@ -47,9 +47,11 @@ def maintainContactWithRemote():
     	print(states)
 
     	if(states["lightsOn"] == "1"):
-    		r = requests.get("http://192.169.212.122/lightsOn")
+    		r = requests.get("http://192.168.212.122/lightsOn")
+    	if(states["lightsOff"] == "1"):
+    		r = requests.get("http://192.168.212.122/lightsOff")
     		
-    	time.sleep(1)
+    	time.sleep(0.05)
         
 statusServer = threading.Thread(target = startStatusServer)
 remoteMaintain = threading.Thread(target = maintainContactWithRemote)
