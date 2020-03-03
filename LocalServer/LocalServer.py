@@ -39,6 +39,7 @@ def startStatusServer():
 def maintainContactWithRemote():
     while(True):
     	r = requests.post("http://100.35.205.75:23653", headers = {"GETALL" :"null"})
+
     	inString = r.text
     	splitString = inString.split(";")
     	for i in splitString:
