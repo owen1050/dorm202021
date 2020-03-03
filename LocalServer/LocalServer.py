@@ -38,7 +38,7 @@ def startStatusServer():
 
 def maintainContactWithRemote():
     while(True):
-    	r = requests.post("http://127.0.0.1:23654", headers = {"GETALL" :"null"})
+    	r = requests.post("http://100.35.205.75:23653", headers = {"GETALL" :"null"})
     	inString = r.text
     	splitString = inString.split(";")
     	for i in splitString:
@@ -48,8 +48,10 @@ def maintainContactWithRemote():
 
     	if(states["lightsOn"] == "1"):
     		r = requests.get("http://192.168.212.122/lightsOn")
+    		r = requests.post("http://100.35.205.75:23653", headers = {"lightsOn" :"0"})
     	if(states["lightsOff"] == "1"):
     		r = requests.get("http://192.168.212.122/lightsOff")
+    		r = requests.post("http://100.35.205.75:23653", headers = {"lightsOff" :"0"})
     		
     	time.sleep(0.05)
         
