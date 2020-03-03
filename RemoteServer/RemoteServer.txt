@@ -1,0 +1,3 @@
+Remote server will run on any machine which is open to public http requests. port 23654. It will take requests from google, ifttt, apps, and a website.
+It will only hold the current state of actions. The local server will ask for the states and perform the actions. 
+

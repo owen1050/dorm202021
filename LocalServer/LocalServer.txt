@@ -1,0 +1,1 @@
+This local server will poll the remote server and make requests to devices to perform actions

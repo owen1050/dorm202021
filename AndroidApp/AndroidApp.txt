@@ -1,0 +1,1 @@
+Android app will control room with HTTP requests to remoteServe. See remoteServer.txt for http formatting requests

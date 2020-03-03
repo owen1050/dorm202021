@@ -1,0 +1,40 @@
+Remote Server (external IP 100.35.205.75): Open Port(23654) on device (192.168.1.99) runs an HTTP Python server. 
+Get request to server returns a statement confirming it is alive
+If > 15 seocnds between asking if alive, throw IFTTT text
+
+
+POST request commands
+{“VARIABLE_NAME” : “VALUE”} sets variable name to value
+If var doesnt exist add var
+{“GET” : “VARIABLE_NAME”} returns VARIABLE_NAME=VALUE
+{“GETALL” : null} returns VARIABLE_NAME=VALUE;VARIABLE_NAME=VALUE separated list
+{“RESET”:null}
+{“REBOOT”:null}
+Have vars stored in dict
+
+
+
+Local Server (unable to port forward) acts as local version of remote server. Checks for updates and pushes to all local dumb servers to issue commands.
+Every minute get request remote server and all children. If no response throw IFTTT Text
+Get request (local only) returns a statement confirming it is alive
+Post request (local only)
+{“RESET”:null}
+{“REBOOT”:null}
+
+Have vars stored in dict
+Every 0.1 Seconds makes a post to remote server {“GETALL”:null} to get updated variable state. 
+If vars missing add to list
+If action is required then it will make a get request to the device. 
+http://DEVICE_IP/VARIABLE with {“value” : VALUE}
+If received VARIABLE=NEW_VALUE then call
+Post remote server {VARIABLE_NAME: NEW_VALUE}
+
+
+Dumb servers on esp8266:
+Static IP
+Start server on port 80
+On bootup call remoteServer:23654 {“VARIABLE_NAME” : “0”} to instantiate all vars
+Have static_ip/VARIABLE_NAME {“value” : VALUE} to respond to each action that device can perform 
+Call remoteServer:23654 {“VARIABLE_NAME” : “VALUE”}
+If no check in from local in 80 seconds then call iftt error
+
