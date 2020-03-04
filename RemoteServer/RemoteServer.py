@@ -60,10 +60,11 @@ def checkStatus():
     global remoteServerError
     global lastCheckin
     while remoteServerError==False:
-        time.sleep(10)
-        if(time.time() - lastCheckin > 70):
+        time.sleep(1)
+        if(time.time() - lastCheckin >10):
             print("LocalServerIsDown")
-            remoteServerError = True
+            lastCheckin = time.time()
+            #remoteServerError = True
             #impliment IFTTT Text
 
 checker = threading.Thread(target = checkStatus)
