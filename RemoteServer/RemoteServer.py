@@ -1,7 +1,7 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import time, threading
 
-states = {"remoteServerOn" : 1, "lightsOn" :0, "lightsOff" : 0}
+states = {"remoteServerOn" : 1, "lightsOn" :0, "lightsOff" : 0, "mainOn" : 0, "mainOff" : 0 ,"hallOn" : 0, "hallOff" : 0, "mainOnHallOff":0, "mainOffHallOn" :0}
 lastCheckin = time.time()
 remoteServerError = False
 
