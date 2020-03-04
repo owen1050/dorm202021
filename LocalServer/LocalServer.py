@@ -49,24 +49,12 @@ def maintainContactWithRemote():
     			states[i.split('=')[0]] = i.split('=')[1]
     	print(states)
 
-    	if(states["lightsOn"] == "1"):
-    		r = requests.get(lightUrl + "lightsOn")
-    		r = requests.post(remoteUrl, headers = {"lightsOn" :"0"})
-    	if(states["lightsOff"] == "1"):
-    		r = requests.get(lightUrl + "lightsOff")
-    		r = requests.post(remoteUrl, headers = {"lightsOff" :"0"})
-    	if(states["mainOn"] == "1"):
-    		r = requests.get(lightUrl + "mainOn")
-    		r = requests.post(remoteUrl, headers = {"mainOn" :"0"})
-    	if(states["lightsOn"] == "1"):
-    		r = requests.get(lightUrl + "lightsOn")
-    		r = requests.post(remoteUrl, headers = {"lightsOn" :"0"})
-    	if(states["lightsOn"] == "1"):
-    		r = requests.get(lightUrl + "lightsOn")
-    		r = requests.post(remoteUrl, headers = {"lightsOn" :"0"})
-    	if(states["lightsOn"] == "1"):
-    		r = requests.get(lightUrl + "lightsOn")
-    		r = requests.post(remoteUrl, headers = {"lightsOn" :"0"})
+    	lightArduinoPoss = ["lightsOn","lightsOff","mainOn", "mainOff", "hallOn", "hallOff", "mainOnHallOff", "mainOffHallOn"]
+
+    	for par in lightArduinoPoss:
+    		if(states[par] == "1"):
+	    		r = requests.get(lightUrl + par)
+	    		r = requests.post(remoteUrl, headers = {par :"0"})
     		
     	time.sleep(0.05)
         

@@ -106,15 +106,17 @@ void setup() {
     
   });
   server.on("/mainOnHallOff", []() {
-    Serial.println("hallOff");
-    server.send(200, "text/plain", "hallOff");
+    Serial.println("mainOnHallOff");
+    server.send(200, "text/plain", "mainOnHallOff");
     hallState = -1;
+    mainState = 1;
     
   });
   server.on("/mainOffHallOn", []() {
-    Serial.println("hallOff");
-    server.send(200, "text/plain", "hallOff");
-    hallState = -1;
+    Serial.println("mainOffHallOn");
+    server.send(200, "text/plain", "mainOffHallOn");
+    hallState = 1;
+    mainState = -1;
     
   });
   
