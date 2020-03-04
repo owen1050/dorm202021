@@ -3,11 +3,31 @@
 #include <ESP8266WebServer.h>
 #include <ESP8266mDNS.h>
 #include <ESP8266HTTPClient.h>
+#include <Servo.h>
+
+Servo hallServo;
+Servo mainServo;
 
 const char* ssid = "Room313";
 const char* password = "12345678";
 String Link = "http://127.0.0.1:23654";
 ESP8266WebServer server(80);
+int mainState = 0;
+int hallState = 0;
+unsigned long mainTime = 0;
+unsigned long hallTime = 0;
+
+int hallPosOff = 120;
+int hallPosOn = 50;
+int hallPosN = (int)((hallPosOn + hallPosOff)/2);
+int mainPosOff = 20;
+int mainPosOn = 94;
+int mainPosN = (int)((mainPosOn + mainPosOff)/2);
+int hallPos = 0;
+int mainPos = 0;
+
+int hallPin = 5;
+int mainPin = 3;
 
 void handleRoot() {
   server.send(200, "text/plain", "hello from esp8266!");
@@ -52,20 +72,131 @@ void setup() {
   server.on("/lightsOn", []() {
     Serial.println("lightsOn");
     server.send(200, "text/plain", "lightsOn");
-    //postReq("lightsOn", "0");
+    mainState = 1;
+    hallState = 1;
   });
   server.on("/lightsOff", []() {
     Serial.println("lightsOff");
     server.send(200, "text/plain", "lightsOff");
-    //postReq("lightsOff", "0");
+    mainState = -1;
+    hallState = -1;
   });
-
+  server.on("/mainOn", []() {
+    Serial.println("mainOn");
+    server.send(200, "text/plain", "mainOn");
+    mainState = 1;
+    
+  });
+  server.on("/mainOff", []() {
+    Serial.println("mainOff");
+    server.send(200, "text/plain", "mainOff");
+    mainState = -1;
+    
+  });
+  server.on("/hallOn", []() {
+    Serial.println("hallOn");
+    server.send(200, "text/plain", "hallOn");
+    hallState = 1;
+    
+  });
+  server.on("/hallOff", []() {
+    Serial.println("hallOff");
+    server.send(200, "text/plain", "hallOff");
+    hallState = -1;
+    
+  });
+  server.on("/mainOnHallOff", []() {
+    Serial.println("hallOff");
+    server.send(200, "text/plain", "hallOff");
+    hallState = -1;
+    
+  });
+  server.on("/mainOffHallOn", []() {
+    Serial.println("hallOff");
+    server.send(200, "text/plain", "hallOff");
+    hallState = -1;
+    
+  });
+  
   server.onNotFound(handleNotFound);
   server.begin();
   Serial.println("HTTP server started");
 }
 
+void moveMotors()
+{
+  if(hallState != 0)
+  {
+    if(hallState == 1)
+    {
+      hallPos = hallPosOn;
+    }
+    else
+    {
+      hallPos = hallPosOff;
+    }
+    hallTime = (int)(millis()/1000);
+    hallState = 0;
+    Serial.println("hall move");
+  }
+  if(mainState != 0)
+  {
+    if(mainState == 1)
+    {
+      mainPos = mainPosOn;
+    }
+    else
+    {
+      mainPos = mainPosOff;
+    }
+    mainTime = (int)(millis()/1000);
+    mainState = 0;
+    Serial.println("main move");
+  }
+
+  int ct = (int)(millis()/1000);
+
+  if(ct - mainTime > 2)
+  {
+    mainPos = mainPosN;
+  }
+  if(ct - mainTime < 4)
+  {
+    Serial.println("attached main");
+    mainServo.attach(mainPin);
+    mainServo.write(mainPos);
+  }
+  else
+  {
+    mainServo.detach();
+    Serial.println("detached main");
+  }
+
+  if(ct - hallTime >2)
+  {
+    hallPos = hallPosN;
+  }
+  if(ct - hallTime < 4
+  )
+  {
+    Serial.println("attached hall");
+    hallServo.attach(hallPin);
+    hallServo.write(hallPos);
+  }
+  else
+  {
+    hallServo.detach();
+    Serial.println("detached hall");
+  }
+}
+
 void loop() {
   server.handleClient();
   MDNS.update();
+  moveMotors();
+  Serial.print("Hall Pos:");
+  Serial.println(hallServo.read());
+  Serial.print("Main Pos:");
+  Serial.println(mainServo.read());
+  delay(100);
 }
