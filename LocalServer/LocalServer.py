@@ -4,7 +4,7 @@ import time, threading, requests
 states = {"remoteServerOn" : 1, "lightsOn" :0, "lightsOff" : 0, "mainOn" : 0, "mainOff" : 0 ,"hallOn" : 0, "hallOff" : 0, "mainOnHallOff":0, "mainOffHallOn" :0}
 lastCheckin = time.time()
 remoteServerError = False
-remoteUrl = "http://100.35.205.75:23653"
+remoteUrl = "http://100.35.205.75:23655"
 lightUrl = "http://192.168.212.122/"
 iftttErrorURL = "https://maker.ifttt.com/trigger/dormError/with/key/Bf91G_MsjKUzsWqRs5N7n"
 lastError = 20
