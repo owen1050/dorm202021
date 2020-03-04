@@ -1,5 +1,5 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
-import time, threading
+import time, threading, requests
 
 states = {"remoteServerOn" : 1, "lightsOn" :0, "lightsOff" : 0, "mainOn" : 0, "mainOff" : 0 ,"hallOn" : 0, "hallOff" : 0, "mainOnHallOff":0, "mainOffHallOn" :0}
 lastCheckin = time.time()
@@ -29,7 +29,7 @@ class httpServer(BaseHTTPRequestHandler):
         reboot = False
         if self.headers["RESET"] is not None:
             postReply = "ResetAllVarsTo0"
-            print("Received POST for Reset")
+            print("Received POST for Reset at:" + str(time.time()))
             for x in states:
                 states[x] = 0
 
@@ -42,14 +42,14 @@ class httpServer(BaseHTTPRequestHandler):
             print("Received POST for GET:"+ self.headers["GET"] + ":"+ postReply)
 
         if self.headers["GETALL"] is not None:
-            print("Received POST for GETALL")
+            print("Received POST for GETALL at:" + str(time.time()))
             for x in states:
                 postReply = postReply + str(x) + "=" + str(states[x]) + ";"
 
         for x in states:
             if self.headers[x] is not None:
                 postReply = "Changed variable " + x + " to " + self.headers[x]
-                print(postReply)
+                print("received post for " + postReply)
                 states[x] = self.headers[x]
         if postReply == "":
             postReply = "ERROR"
