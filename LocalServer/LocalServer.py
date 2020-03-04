@@ -1,9 +1,11 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import time, threading, requests
 
-states = {"remoteServerOn" : 1, "lightsOn" :0, "lightsOff" : 0}
+states = {"remoteServerOn" : 1, "lightsOn" :0, "lightsOff" : 0, "mainOn" : 0, "mainOff" : 0 ,"hallOn" : 0, "hallOff" : 0, "mainOnHallOff":0, "mainOffHallOn" :0}
 lastCheckin = time.time()
 remoteServerError = False
+remoteUrl = "http://100.35.205.75:23653"
+lightUrl = "http://192.168.212.122/"
 
 class httpServer(BaseHTTPRequestHandler):
     global remoteServerError, lastCheckin, states
@@ -38,7 +40,7 @@ def startStatusServer():
 
 def maintainContactWithRemote():
     while(True):
-    	r = requests.post("http://100.35.205.75:23653", headers = {"GETALL" :"null"})
+    	r = requests.post(remoteUrl, headers = {"GETALL" :"null"})
 
     	inString = r.text
     	splitString = inString.split(";")
@@ -48,11 +50,23 @@ def maintainContactWithRemote():
     	print(states)
 
     	if(states["lightsOn"] == "1"):
-    		r = requests.get("http://192.168.212.122/lightsOn")
-    		r = requests.post("http://100.35.205.75:23653", headers = {"lightsOn" :"0"})
+    		r = requests.get(lightUrl + "lightsOn")
+    		r = requests.post(remoteUrl, headers = {"lightsOn" :"0"})
     	if(states["lightsOff"] == "1"):
-    		r = requests.get("http://192.168.212.122/lightsOff")
-    		r = requests.post("http://100.35.205.75:23653", headers = {"lightsOff" :"0"})
+    		r = requests.get(lightUrl + "lightsOff")
+    		r = requests.post(remoteUrl, headers = {"lightsOff" :"0"})
+    	if(states["mainOn"] == "1"):
+    		r = requests.get(lightUrl + "mainOn")
+    		r = requests.post(remoteUrl, headers = {"mainOn" :"0"})
+    	if(states["lightsOn"] == "1"):
+    		r = requests.get(lightUrl + "lightsOn")
+    		r = requests.post(remoteUrl, headers = {"lightsOn" :"0"})
+    	if(states["lightsOn"] == "1"):
+    		r = requests.get(lightUrl + "lightsOn")
+    		r = requests.post(remoteUrl, headers = {"lightsOn" :"0"})
+    	if(states["lightsOn"] == "1"):
+    		r = requests.get(lightUrl + "lightsOn")
+    		r = requests.post(remoteUrl, headers = {"lightsOn" :"0"})
     		
     	time.sleep(0.05)
         
