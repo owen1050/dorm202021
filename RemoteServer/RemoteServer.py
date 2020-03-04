@@ -61,8 +61,8 @@ class httpServer(BaseHTTPRequestHandler):
             #reboot here
 
 def run():
-    httpd = HTTPServer(('', 23653), httpServer)
-    print ("Starting http server on 23653")
+    httpd = HTTPServer(('', 23655), httpServer)
+    print ("Starting http server on 23655")
     try:         
         httpd.serve_forever()     
     except:         
