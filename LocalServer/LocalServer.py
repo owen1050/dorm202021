@@ -6,6 +6,8 @@ lastCheckin = time.time()
 remoteServerError = False
 remoteUrl = "http://100.35.205.75:23653"
 lightUrl = "http://192.168.212.122/"
+iftttErrorURL = "https://maker.ifttt.com/trigger/dormError/with/key/Bf91G_MsjKUzsWqRs5N7n"
+lastError = 20
 
 class httpServer(BaseHTTPRequestHandler):
 	global remoteServerError, lastCheckin, states
@@ -49,29 +51,30 @@ def maintainContact():
 	while(True):
 		time.sleep(5)
 		try:
-			r = requests.get(remoteUrl)
+			r = requests.get(remoteUrl, timeout = 1)
 			
 		except:
-			pass
-			#call ifttt error for remote
+			print("REMOTE FAILED")
+			iftttError("Remote Server Could Not Be Contacted")
 		try:
-			r = requests.get(lightUrl)
-			
+			r = requests.get(lightUrl, timeout = 1)
 		except:
-			pass
-			#call ifttt error for lights
+			print("LIGHTS FAILED")
+			iftttError("Lights Could Not Be Contacted")
 
-
+def iftttError(s):
+	global lastError
+	if(time.time() - lastError > 600):
+		print("ifttt sent:"+s)
+		r = requests.post(iftttErrorURL, headers = {"Content-Type": "application/json"}, data = "{\"value1\":\""+s+"\"}")
+		lastError = time.time()
 def getRemoteVars():
 	prevVar = ""
 	lt = 0
 	while(True):
 		try:
-			try:
-				r = requests.post(remoteUrl, headers = {"GETALL" :"null"})
-			except:
-				pass
-				#remote failed
+			r = requests.post(remoteUrl, headers = {"GETALL" :"null"})
+			
 			inString = r.text
 			if(prevVar == inString):
 				if(int(time.time())%10 == 0 and str(int(time.time())) != lt):
@@ -103,7 +106,8 @@ def getRemoteVars():
 
 		except Exception as e:
 			print(e)
-			#just to ensure no failure
+			iftttError(str(e))
+			time.sleep(1)
 		
 statusServer = threading.Thread(target = startStatusServer)
 varUpdate = threading.Thread(target = getRemoteVars)

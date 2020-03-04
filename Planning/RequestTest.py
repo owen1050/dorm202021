@@ -1,3 +1,4 @@
 import requests
-r = requests.get("http://192.168.212.122:23666")
+iftttErrorURL = "http://maker.ifttt.com/trigger/dormError/with/key/Bf91G_MsjKUzsWqRs5N7n"
+r = requests.post(iftttErrorURL, headers = {"Content-Type": "application/json"}, data = "{\"value1\":\"python\"}")
 print(r.text)

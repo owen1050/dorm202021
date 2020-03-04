@@ -31,10 +31,12 @@ int mainPin = 3;
 
 void handleRoot() {
   server.send(200, "text/plain", "lightsAlive");
+  Serial.println("AliveCheckedByLocal");
 }
 
 void handleNotFound() {  
   server.send(404, "text/plain", "notFound");
+  Serial.println("404");
 }
 
 void postReq(String head, String cont)
@@ -164,14 +166,14 @@ void moveMotors()
   }
   if(ct - mainTime < 4)
   {
-    Serial.println("attached main");
+    Serial.print("attached main:");
+    Serial.println(mainPos);
     mainServo.attach(mainPin);
     mainServo.write(mainPos);
   }
   else
   {
     mainServo.detach();
-    Serial.println("detached main");
   }
 
   if(ct - hallTime >2)
@@ -181,24 +183,27 @@ void moveMotors()
   if(ct - hallTime < 4
   )
   {
-    Serial.println("attached hall");
+    Serial.print("attached hall:");
+    Serial.println(hallPos);
     hallServo.attach(hallPin);
     hallServo.write(hallPos);
   }
   else
   {
     hallServo.detach();
-    Serial.println("detached hall");
+    
   }
 }
+unsigned long updateT = millis();
 
 void loop() {
   server.handleClient();
   MDNS.update();
   moveMotors();
-  Serial.print("Hall Pos:");
-  Serial.println(hallServo.read());
-  Serial.print("Main Pos:");
-  Serial.println(mainServo.read());
-  delay(100);
+  if(millis() - updateT > 1000)
+  {
+    Serial.println("Alive");
+    updateT = millis();
+  }
+  delay(50);
 }
