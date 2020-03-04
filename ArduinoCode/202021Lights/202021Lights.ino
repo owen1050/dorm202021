@@ -30,7 +30,7 @@ int hallPin = 5;
 int mainPin = 3;
 
 void handleRoot() {
-  server.send(200, "text/plain", "hello from esp8266!");
+  server.send(200, "text/plain", "lightsAlive");
 }
 
 void handleNotFound() {  
