@@ -1,0 +1,5 @@
+Add rest of arduino
+Time based execution
+IFTTT Google 
+Logging
+Maybe make error reporting less frequent

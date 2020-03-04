@@ -1,5 +1,5 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
-import time, threading, requests
+import time, threading, requests, os
 
 states = {"remoteServerOn" : 1, "lightsOn" :0, "lightsOff" : 0, "mainOn" : 0, "mainOff" : 0 ,"hallOn" : 0, "hallOff" : 0, "mainOnHallOff":0, "mainOffHallOn" :0}
 lastCheckin = time.time()
@@ -57,8 +57,9 @@ class httpServer(BaseHTTPRequestHandler):
         self.wfile.write(str(postReply).encode())
 
         if(reboot):
-            pass
-            #reboot here
+            passw = "adminadmin"
+            com = "reboot"
+            p = os.system("echo %s|sudo -S %s" %(passw, com))
 
 def run():
     httpd = HTTPServer(('', 23655), httpServer)
