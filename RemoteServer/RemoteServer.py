@@ -48,8 +48,8 @@ class httpServer(BaseHTTPRequestHandler):
         self.wfile.write(str(postReply).encode())
 
 def run():
-    httpd = HTTPServer(('', 23654), httpServer)
-    print ("Starting http server on 23654")
+    httpd = HTTPServer(('', 23653), httpServer)
+    print ("Starting http server on 23653")
     try:         
         httpd.serve_forever()     
     except:         
