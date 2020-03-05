@@ -72,8 +72,8 @@ def run():
 
 def iftttError(s):
     global lastError
-    if(time.time() - lastError > 600):
-        print(s)
+    if(time.time() - lastError > 60):
+        print("ifttt contacted:" + s)
         r = requests.post(iftttErrorURL, headers = {"Content-Type": "application/json"}, data = "{\"value1\":\""+s+"\"}")
         lastError = time.time()
 

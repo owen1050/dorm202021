@@ -114,7 +114,6 @@ def getRemoteVars():
 
 		except Exception as e:
 			print(str(e)[:50])
-			iftttError(str(e))
 			time.sleep(1)
 		
 statusServer = threading.Thread(target = startStatusServer)
