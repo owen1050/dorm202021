@@ -8,13 +8,19 @@ const char* ssid = "Room313";
 const char* password = "12345678";
 String Link = "http://127.0.0.1:23654";
 ESP8266WebServer server(80);
+unsigned long updateT = millis();
 
-boolean blindState = 0;
+bool blindState = 0;
 unsigned long blindMoveTime = 0;
 int blindUpTime = 10000;
-int blindDownTime = 9000;
+int blindDownTime = 12000;
 int motorPin = 0;
 int switchPin = 0;
+bool switchIsPressed = false;
+int motorValue = 0;
+int motorUpValue = 170;
+int motorDownValue = 75;
+int motorStayValue = 0;
 
 void handleRoot() {
   server.send(200, "text/plain", "blindsAlive");
@@ -61,16 +67,56 @@ void setup() {
     blindState = -1;
     blindMoveTime = millis();
   });
-
-  if(blindState == 1 and millis() - blindMoveTime < blindUpTime)
-  {
-    
-  }
   
-
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+
+  server.handleClient();
+  MDNS.update();
+  
+  if(millis() - updateT > 1000)
+  {
+    Serial.println("Alive");
+    updateT = millis();
+  }
+  
+  switchIsPressed = false;
+  if(digitalRead(switchPin))
+  {
+    switchIsPressed = true;
+  }
+  
+  if(blindState == 1 and millis() - blindMoveTime < blindUpTime and !switchIsPressed)
+  {
+    motorValue = motorUpValue;
+  }
+  else
+  {
+    if(millis() - blindMoveTime > blindUpTime)
+    {
+      motorValue = motorStayValue;
+      blindState = 0;
+    }
+  }
+    
+  if(blindState == -1 and millis() - blindMoveTime < blindDownTime and !switchIsPressed)
+  {
+    motorValue = motorDownValue;
+  }
+  else
+  {
+    if(blindState == -1 and millis() - blindMoveTime > blindDownTime)
+    {
+      motorValue = motorStayValue;
+      blindState = 0;
+    }
+  }
+
+  if(blindState == 0)
+  {
+    motorValue = motorStayValue;
+  }
+  analogWrite(motorPin, motorValue);
 
 }
