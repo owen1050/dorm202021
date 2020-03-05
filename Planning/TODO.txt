@@ -1,6 +1,11 @@
-Make a "failure" only a failure if it fails multiple times in a row
 Add rest of arduino
+implimnet blinds partially
+finish IR implemnetation
 Time based execution
 IFTTT Google 
 Logging
 Maybe make error reporting less frequent
+
+
+before area duty, ensure all parts are available to swap. 
+test test test then switch over. Goal code done before area duty, switch over during area duty

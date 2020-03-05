@@ -103,7 +103,7 @@ void loop() {
   if(blindState == -1 and millis() - blindMoveTime < blindDownTime and !switchIsPressed)
   {
     motorValue = motorDownValue;
-  }
+  } 
   else
   {
     if(blindState == -1 and millis() - blindMoveTime > blindDownTime)
