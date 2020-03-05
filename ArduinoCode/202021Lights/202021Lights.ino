@@ -143,6 +143,7 @@ void moveMotors()
     hallState = 0;
     Serial.println("hall move");
   }
+  
   if(mainState != 0)
   {
     if(mainState == 1)
