@@ -82,7 +82,7 @@ def checkStatus():
     global lastCheckin
     while True:
         time.sleep(1)
-        if(time.time() - lastCheckin >10):
+        if(time.time() - lastCheckin >40):
             print("LocalServerIsDown")
             lastCheckin = time.time()
             iftttError("Local server could not be contacted")            

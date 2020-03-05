@@ -48,19 +48,27 @@ def startStatusServer():
 		print("Shutdown server") 
 
 def maintainContact():
+	remoteErrors = 0
+	lightErrors = 0
 	while(True):
-		time.sleep(5)
+		time.sleep(4)
 		try:
 			r = requests.get(remoteUrl, timeout = 1)
-			
+			remoteErrors = 0
 		except:
 			print("REMOTE FAILED")
-			iftttError("Remote Server Could Not Be Contacted")
+			remoteErrors = remoteErrors + 1
 		try:
 			r = requests.get(lightUrl, timeout = 1)
+			lightErrors = 0
 		except:
+			lightErrors = lightErrors + 1
 			print("LIGHTS FAILED")
-			iftttError("Lights Could Not Be Contacted")
+		
+		if(lightErrors > 4):
+			iftttError("LightsHaveFailled5Times")
+		if(remoteErrors > 4):
+			iftttError("RemoteCanNotBeContacted5Times")
 
 def iftttError(s):
 	global lastError
@@ -105,7 +113,7 @@ def getRemoteVars():
 				time.sleep(0.05)
 
 		except Exception as e:
-			print(e)
+			print(str(e)[:50])
 			iftttError(str(e))
 			time.sleep(1)
 		

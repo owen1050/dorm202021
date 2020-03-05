@@ -1,3 +1,4 @@
+Make a "failure" only a failure if it fails multiple times in a row
 Add rest of arduino
 Time based execution
 IFTTT Google 
