@@ -1,12 +1,13 @@
+#include <IRremoteESP8266.h>
+#include <IRsend.h>
+
 #include <ESP8266WiFi.h>
 #include <WiFiClient.h>
 #include <ESP8266WebServer.h>
 #include <ESP8266mDNS.h>
 #include <ESP8266HTTPClient.h>
-#include <IRLibSendBase.h>    //We need the base code
-#include <IRLib_HashRaw.h>    //Only use raw sender
 
-IRsendRaw mySender;
+IRsend irsend(D2);
 
 #define RAW_DATA_LEN 68
 uint16_t projPowerIR[RAW_DATA_LEN]={8998, 4502, 562, 566, 562, 566, 562, 566, 562, 562, 562, 566, 562, 566, 534, 594, 562, 566, 562, 1682, 562, 1686, 562, 1682, 562, 1682, 562, 1686, 562, 566, 562, 1682, 562, 1686, 562, 562, 562, 566, 562, 1686, 562, 1682, 562, 1686, 562, 562, 534, 594, 562, 566, 562, 1682, 562, 1686, 562, 566, 562, 562, 566, 562, 534, 1714, 534, 1694, 582, 1682, 562, 1000};
@@ -29,11 +30,13 @@ int mute = 0;
 int cd = 0;
 int phono = 0;
 bool irBlast = false;
+unsigned long lastVol = 0;
+unsigned long lastProj = 0;
 
 const char* ssid = "Room313";
 const char* password = "12345678";
 String Link = "http://127.0.0.1:23654";
-ESP8266WebServer server(80);
+ESP8266WebServer server(81);
 unsigned long updateT = millis();
 
 void handleRoot() {
@@ -51,7 +54,7 @@ void setup() {
   WiFi.disconnect();
   WiFi.begin(ssid, password);
   WiFi.mode(WIFI_STA);
-  
+  pinMode(D2, OUTPUT);
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
@@ -130,69 +133,87 @@ void setup() {
     server.send(200, "text/plain", "cd");
     cd = 2;
   });
+  server.onNotFound(handleNotFound);
+  server.begin();
+  Serial.println("HTTP server started");
 }
 
 void loop() {
 
   server.handleClient();
   MDNS.update();
-
+  if(millis() - updateT > 1000)
+  {
+    Serial.println("Alive");
+    updateT = millis();
+  }
   irBlast = false;
 
-  if(projPower != 0 and irBlast == false)
+  if(projPower != 0 and irBlast == false and millis() - lastProj > 1000)
   {
+    lastProj = millis();
     projPower--;
     irBlast = true;
-    mySender.send(projPowerIR, RAW_DATA_LEN, 36);
+    irsend.sendRaw(projPowerIR, RAW_DATA_LEN, 36);
+    Serial.println("Blasted: projPowerIR");
   }
 
-  if(volumeUp != 0 and irBlast == false)
+  if(volumeUp != 0 and irBlast == false and millis() - lastVol > 250)
   {
+    lastVol = millis();
     volumeUp--;
     irBlast = true;
-    mySender.send(volumeUpIR, RAW_DATA_LEN, 36);
+    irsend.sendRaw(volumeUpIR, RAW_DATA_LEN, 36);
+    Serial.println("Blasted:volumeUpIR");
   }
 
-  if(volumeDown != 0 and irBlast == false)
+  if(volumeDown != 0 and irBlast == false and millis() - lastVol > 250)
   {
+    lastVol = millis();
     volumeDown--;
     irBlast = true;
-    mySender.send(volumeDownIR, RAW_DATA_LEN, 36);
+    irsend.sendRaw(volumeDownIR, RAW_DATA_LEN, 36);
+    Serial.println("Blasted:volumeDownIR");
   }
 
   if(auxOne != 0 and irBlast == false)
   {
     auxOne--;
     irBlast = true;
-    mySender.send(auxOneIR, RAW_DATA_LEN, 36);
+    irsend.sendRaw(auxOneIR, RAW_DATA_LEN, 36);
+    Serial.println("Blasted:auxOneIR");
   }
 
   if(auxTwo != 0 and irBlast == false)
   {
     auxTwo--;
     irBlast = true;
-    mySender.send(auxTwoIR, RAW_DATA_LEN, 36);
+    irsend.sendRaw(auxTwoIR, RAW_DATA_LEN, 36);
+    Serial.println("Blasted:auxTwoIR");
   }
 
   if(mute != 0 and irBlast == false)
   {
     mute--;
     irBlast = true;
-    mySender.send(muteIR, RAW_DATA_LEN, 36);
+    irsend.sendRaw(muteIR, RAW_DATA_LEN, 36);
+    Serial.println("Blasted:muteIR");
   }
 
   if(cd != 0 and irBlast == false)
   {
     cd--;
     irBlast = true;
-    mySender.send(cdIR, RAW_DATA_LEN, 36);
+    irsend.sendRaw(cdIR, RAW_DATA_LEN, 36);
+    Serial.println("Blasted:cdIR");
   }
 
   if(phono != 0 and irBlast == false)
   {
     phono--;
     irBlast = true;
-    mySender.send(phonoIR, RAW_DATA_LEN, 36);
+    irsend.sendRaw(phonoIR, RAW_DATA_LEN, 36);
+    Serial.println("Blasted:phonoIR");
   }
 
 }
