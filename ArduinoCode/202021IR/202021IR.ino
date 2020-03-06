@@ -36,7 +36,7 @@ unsigned long lastProj = 0;
 const char* ssid = "Room313";
 const char* password = "12345678";
 String Link = "http://127.0.0.1:23654";
-ESP8266WebServer server(81);
+ESP8266WebServer server(80);
 unsigned long updateT = millis();
 
 void handleRoot() {
