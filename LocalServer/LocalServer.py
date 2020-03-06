@@ -1,11 +1,13 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import time, threading, requests
 
-states = {"remoteServerOn" : 1, "lightsOn" :0, "lightsOff" : 0, "mainOn" : 0, "mainOff" : 0 ,"hallOn" : 0, "hallOff" : 0, "mainOnHallOff":0, "mainOffHallOn" :0}
+states = {"remoteServerOn" : 1, "lightsOn" :0, "lightsOff" : 0, "mainOn" : 0, "mainOff" : 0 ,"hallOn" : 0, "hallOff" : 0, "mainOnHallOff":0, "mainOffHallOn" :0, "projectorOn" :0,"projectorOff" :0,"volumeUp2" :0,"volumeDown2" :0,"volumeUp5" :0,"volumeDown5" :0,"auxOne" :0,"auxTwo" :0,"phono" :0,"mute" :0,"cd" :0,"openBlinds" :0,"closeBlinds" :0}
 lastCheckin = time.time()
 remoteServerError = False
 remoteUrl = "http://100.35.205.75:23655"
 lightUrl = "http://192.168.212.122/"
+blindsUrl = "http://192.168.212.122/"
+IRUrl = "http://192.168.212.122/"
 iftttErrorURL = "https://maker.ifttt.com/trigger/dormError/with/key/Bf91G_MsjKUzsWqRs5N7n"
 lastError = 20
 
@@ -50,6 +52,9 @@ def startStatusServer():
 def maintainContact():
 	remoteErrors = 0
 	lightErrors = 0
+	blindErrors = 0
+	irErrors = 0
+
 	while(True):
 		time.sleep(4)
 		try:
@@ -58,17 +63,36 @@ def maintainContact():
 		except:
 			print("REMOTE FAILED")
 			remoteErrors = remoteErrors + 1
+
 		try:
 			r = requests.get(lightUrl, timeout = 1)
 			lightErrors = 0
 		except:
 			lightErrors = lightErrors + 1
 			print("LIGHTS FAILED")
+
+		try:
+			r = requests.get(blindsUrl, timeout = 1)
+			blindErrors = 0
+		except:
+			blindErrors = blindErrors + 1
+			print("blinds FAILED")
+
+		try:
+			r = requests.get(IRUrl, timeout = 1)
+			irErrors = 0
+		except:
+			irErrors = irErrors + 1
+			print("IR FAILED")
 		
 		if(lightErrors > 4):
 			iftttError("LightsHaveFailled5Times")
 		if(remoteErrors > 4):
 			iftttError("RemoteCanNotBeContacted5Times")
+		if(blindErrors > 4):
+			iftttError("BlindsHaveFailled5Times")
+		if(irErrors > 4):
+			iftttError("IRHaveFailled5Times")
 
 def iftttError(s):
 	global lastError
@@ -101,15 +125,32 @@ def getRemoteVars():
 				#impliment some txt logging
 
 				lightArduinoPoss = ["lightsOn","lightsOff","mainOn", "mainOff", "hallOn", "hallOff", "mainOnHallOff", "mainOffHallOn"]
-
 				for par in lightArduinoPoss:
 					if(states[par] == "1"):
 						try:
 							r = requests.get(lightUrl + par)
 							r = requests.post(remoteUrl, headers = {par :"0"})
 						except Exception as e:
-							print(e)							
-							#make sure lights dont fail
+							print(e)
+
+				blindArduinoPoss = ["openBlinds", "closeBlinds"]
+				for par in blindArduinoPoss:
+					if(states[par] == "1"):
+						try:
+							r = requests.get(blindsUrl + par)
+							r = requests.post(remoteUrl, headers = {par :"0"})
+						except Exception as e:
+							print(e)
+
+				irArduinoPoss = ["projectorOn" ,"projectorOff" ,"volumeUp2" ,"volumeDown2" ,"volumeUp5" ,"volumeDown5" ,"auxOne" ,"auxTwo" ,"phono","mute" ,"cd"]
+				for par in irArduinoPoss:
+					if(states[par] == "1"):
+						try:
+							r = requests.get(IRUrl + par)
+							r = requests.post(remoteUrl, headers = {par :"0"})
+						except Exception as e:
+							print(e)
+
 				time.sleep(0.05)
 
 		except Exception as e:
