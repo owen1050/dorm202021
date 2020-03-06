@@ -36,6 +36,7 @@ class httpServer(BaseHTTPRequestHandler):
 
         if self.headers["REBOOT"] is not None:
             print("Received POST for Reboot. Server Should be up in 3 minutes")
+            postReply = "Rebooting server please wait 3 minutes"
             reboot = True
 
         if self.headers["GET"] is not None:

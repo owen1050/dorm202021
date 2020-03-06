@@ -68,6 +68,9 @@ void setup() {
     blindMoveTime = millis();
   });
   
+  server.onNotFound(handleNotFound);
+  server.begin();
+  Serial.println("HTTP server started");
 }
 
 void loop() {
