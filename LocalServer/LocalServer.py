@@ -109,7 +109,7 @@ def getRemoteVars():
 			
 			inString = r.text
 			if(prevVar == inString):
-				if(int(time.time())%10 == 0 and str(int(time.time())) != lt):
+				if(int(time.time())%3 == 0 and str(int(time.time())) != lt):
 					lt = str(int(time.time()))
 					print("No Vars Changed:"+ lt)
 

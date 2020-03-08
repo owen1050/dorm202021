@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                 try{
 
                     Log.e("Owen","test");
-                        String url = "http://owenserver.us.to:23654";
+                        String url = "http://100.35.205.75:23655";
                     StrictMode.ThreadPolicy policy = new
                             StrictMode.ThreadPolicy.Builder()
                             .permitAll().build();
@@ -80,22 +80,24 @@ public class MainActivity extends AppCompatActivity {
 
                     Log.e("Owen", "LF");
 
-                    String url = "http://owenserver.us.to:23654";
+                    String url = "http://100.35.205.75:23655";
                     StrictMode.ThreadPolicy policy = new
                             StrictMode.ThreadPolicy.Builder()
                             .permitAll().build();
                     StrictMode.setThreadPolicy(policy);
 
+                    EditText edit =  (EditText) findViewById(R.id.editText);
+                    String temp = edit.getText().toString();
+
 
                     URL myurl = new URL(url);
                     con = (HttpURLConnection) myurl.openConnection();
                     con.setDoOutput(true);
+                    con.setRequestProperty(temp, "1");
                     con.setRequestMethod("POST");
 
                     OutputStreamWriter out = new OutputStreamWriter(
                             con.getOutputStream());
-                    EditText edit =  (EditText) findViewById(R.id.editText);
-                    String temp = edit.getText().toString();
                     out.write(temp);
                     out.close();
                     BufferedReader in = new BufferedReader(
@@ -129,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
 
                     Log.e("Owen", "LF");
 
-                    String url = "http://owenserver.us.to:23654";
+                    String url = "http://100.35.205.75:23655";
                     StrictMode.ThreadPolicy policy = new
                             StrictMode.ThreadPolicy.Builder()
                             .permitAll().build();
@@ -139,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
                     URL myurl = new URL(url);
                     con = (HttpURLConnection) myurl.openConnection();
                     con.setDoOutput(true);
+                    con.setRequestProperty("RESET" , "1");
                     con.setRequestMethod("POST");
 
                     OutputStreamWriter out = new OutputStreamWriter(
@@ -227,7 +230,7 @@ public class MainActivity extends AppCompatActivity {
 
                     Log.e("Owen", "LF");
 
-                    String url = "http://owenserver.us.to:23654";
+                    String url = "http://100.35.205.75:23655";
                     StrictMode.ThreadPolicy policy = new
                             StrictMode.ThreadPolicy.Builder()
                             .permitAll().build();
@@ -237,6 +240,7 @@ public class MainActivity extends AppCompatActivity {
                     URL myurl = new URL(url);
                     con = (HttpURLConnection) myurl.openConnection();
                     con.setDoOutput(true);
+                    con.setRequestProperty("cd" , "1");
                     con.setRequestMethod("POST");
 
                     OutputStreamWriter out = new OutputStreamWriter(
@@ -275,7 +279,7 @@ public class MainActivity extends AppCompatActivity {
 
                     Log.e("Owen", "LF");
 
-                    String url = "http://owenserver.us.to:23654";
+                    String url = "http://100.35.205.75:23655";
                     StrictMode.ThreadPolicy policy = new
                             StrictMode.ThreadPolicy.Builder()
                             .permitAll().build();
@@ -285,6 +289,7 @@ public class MainActivity extends AppCompatActivity {
                     URL myurl = new URL(url);
                     con = (HttpURLConnection) myurl.openConnection();
                     con.setDoOutput(true);
+                    con.setRequestProperty("hallOn" , "1");
                     con.setRequestMethod("POST");
 
                     OutputStreamWriter out = new OutputStreamWriter(
@@ -323,7 +328,7 @@ public class MainActivity extends AppCompatActivity {
 
                     Log.e("Owen", "LF");
 
-                    String url = "http://owenserver.us.to:23654";
+                    String url = "http://100.35.205.75:23655";
                     StrictMode.ThreadPolicy policy = new
                             StrictMode.ThreadPolicy.Builder()
                             .permitAll().build();
@@ -333,6 +338,7 @@ public class MainActivity extends AppCompatActivity {
                     URL myurl = new URL(url);
                     con = (HttpURLConnection) myurl.openConnection();
                     con.setDoOutput(true);
+                    con.setRequestProperty("hallOff" , "1");
                     con.setRequestMethod("POST");
 
                     OutputStreamWriter out = new OutputStreamWriter(
@@ -371,7 +377,7 @@ public class MainActivity extends AppCompatActivity {
 
                     Log.e("Owen", "LF");
 
-                    String url = "http://owenserver.us.to:23654";
+                    String url = "http://100.35.205.75:23655";
                     StrictMode.ThreadPolicy policy = new
                             StrictMode.ThreadPolicy.Builder()
                             .permitAll().build();
@@ -381,6 +387,7 @@ public class MainActivity extends AppCompatActivity {
                     URL myurl = new URL(url);
                     con = (HttpURLConnection) myurl.openConnection();
                     con.setDoOutput(true);
+                    con.setRequestProperty("mainOff" , "1");
                     con.setRequestMethod("POST");
 
                     OutputStreamWriter out = new OutputStreamWriter(
@@ -419,7 +426,7 @@ public class MainActivity extends AppCompatActivity {
 
                     Log.e("Owen", "LF");
 
-                    String url = "http://owenserver.us.to:23654";
+                    String url = "http://100.35.205.75:23655";
                     StrictMode.ThreadPolicy policy = new
                             StrictMode.ThreadPolicy.Builder()
                             .permitAll().build();
@@ -429,6 +436,7 @@ public class MainActivity extends AppCompatActivity {
                     URL myurl = new URL(url);
                     con = (HttpURLConnection) myurl.openConnection();
                     con.setDoOutput(true);
+                    con.setRequestProperty("mainOn" , "1");
                     con.setRequestMethod("POST");
 
                     OutputStreamWriter out = new OutputStreamWriter(
@@ -467,7 +475,7 @@ public class MainActivity extends AppCompatActivity {
 
                     Log.e("Owen", "LF");
 
-                    String url = "http://owenserver.us.to:23654";
+                    String url = "http://100.35.205.75:23655";
                     StrictMode.ThreadPolicy policy = new
                             StrictMode.ThreadPolicy.Builder()
                             .permitAll().build();
@@ -477,6 +485,7 @@ public class MainActivity extends AppCompatActivity {
                     URL myurl = new URL(url);
                     con = (HttpURLConnection) myurl.openConnection();
                     con.setDoOutput(true);
+                    con.setRequestProperty("lightsOn" , "1");
                     con.setRequestMethod("POST");
 
                     OutputStreamWriter out = new OutputStreamWriter(
@@ -515,7 +524,7 @@ public class MainActivity extends AppCompatActivity {
 
                     Log.e("Owen", "LF");
 
-                    String url = "http://owenserver.us.to:23654";
+                    String url = "http://100.35.205.75:23655";
                     StrictMode.ThreadPolicy policy = new
                             StrictMode.ThreadPolicy.Builder()
                             .permitAll().build();
@@ -525,6 +534,7 @@ public class MainActivity extends AppCompatActivity {
                     URL myurl = new URL(url);
                     con = (HttpURLConnection) myurl.openConnection();
                     con.setDoOutput(true);
+                    con.setRequestProperty("lightsOff" , "1");
                     con.setRequestMethod("POST");
 
 
@@ -562,7 +572,7 @@ public class MainActivity extends AppCompatActivity {
                 try{
                     Log.e("Owen", "LF");
 
-                    String url = "http://owenserver.us.to:23654";
+                    String url = "http://100.35.205.75:23655";
                     StrictMode.ThreadPolicy policy = new
                             StrictMode.ThreadPolicy.Builder()
                             .permitAll().build();
@@ -571,6 +581,7 @@ public class MainActivity extends AppCompatActivity {
                     URL myurl = new URL(url);
                     con = (HttpURLConnection) myurl.openConnection();
                     con.setDoOutput(true);
+                    con.setRequestProperty("projectorOn" , "1");
                     con.setRequestMethod("POST");
 
                     OutputStreamWriter out = new OutputStreamWriter(
@@ -607,7 +618,7 @@ public class MainActivity extends AppCompatActivity {
                 try{
                     Log.e("Owen", "LF");
 
-                    String url = "http://owenserver.us.to:23654";
+                    String url = "http://100.35.205.75:23655";
                     StrictMode.ThreadPolicy policy = new
                             StrictMode.ThreadPolicy.Builder()
                             .permitAll().build();
@@ -616,6 +627,7 @@ public class MainActivity extends AppCompatActivity {
                     URL myurl = new URL(url);
                     con = (HttpURLConnection) myurl.openConnection();
                     con.setDoOutput(true);
+                    con.setRequestProperty("projectorOff" , "1");
                     con.setRequestMethod("POST");
 
                     OutputStreamWriter out = new OutputStreamWriter(
@@ -652,7 +664,7 @@ public class MainActivity extends AppCompatActivity {
                 try{
                     Log.e("Owen", "LF");
 
-                    String url = "http://owenserver.us.to:23654";
+                    String url = "http://100.35.205.75:23655";
                     StrictMode.ThreadPolicy policy = new
                             StrictMode.ThreadPolicy.Builder()
                             .permitAll().build();
@@ -699,7 +711,7 @@ public class MainActivity extends AppCompatActivity {
                 try{
                     Log.e("Owen", "LF");
 
-                    String url = "http://owenserver.us.to:23654";
+                    String url = "http://100.35.205.75:23655";
                     StrictMode.ThreadPolicy policy = new
                             StrictMode.ThreadPolicy.Builder()
                             .permitAll().build();
@@ -708,6 +720,7 @@ public class MainActivity extends AppCompatActivity {
                     URL myurl = new URL(url);
                     con = (HttpURLConnection) myurl.openConnection();
                     con.setDoOutput(true);
+                    con.setRequestProperty("mute" , "1");
                     con.setRequestMethod("POST");
 
                     OutputStreamWriter out = new OutputStreamWriter(
@@ -745,7 +758,7 @@ public class MainActivity extends AppCompatActivity {
                 try{
                     Log.e("Owen", "LF");
 
-                    String url = "http://owenserver.us.to:23654";
+                    String url = "http://100.35.205.75:23655";
                     StrictMode.ThreadPolicy policy = new
                             StrictMode.ThreadPolicy.Builder()
                             .permitAll().build();
@@ -754,12 +767,13 @@ public class MainActivity extends AppCompatActivity {
                     URL myurl = new URL(url);
                     con = (HttpURLConnection) myurl.openConnection();
                     con.setDoOutput(true);
+                    con.setRequestProperty("auxOne" , "1");
                     con.setRequestMethod("POST");
 
                     OutputStreamWriter out = new OutputStreamWriter(
                             con.getOutputStream());
 
-                    out.write("set:speeakerInTV=1;");
+                    out.write("set:projectorOff=1;");
                     out.close();
                     BufferedReader in = new BufferedReader(
                             new InputStreamReader(con.getInputStream()));
@@ -790,7 +804,7 @@ public class MainActivity extends AppCompatActivity {
                 try{
                     Log.e("Owen", "LF");
 
-                    String url = "http://owenserver.us.to:23654";
+                    String url = "http://100.35.205.75:23655";
                     StrictMode.ThreadPolicy policy = new
                             StrictMode.ThreadPolicy.Builder()
                             .permitAll().build();
@@ -799,12 +813,13 @@ public class MainActivity extends AppCompatActivity {
                     URL myurl = new URL(url);
                     con = (HttpURLConnection) myurl.openConnection();
                     con.setDoOutput(true);
+                    con.setRequestProperty("auxTwo" , "1");
                     con.setRequestMethod("POST");
 
                     OutputStreamWriter out = new OutputStreamWriter(
                             con.getOutputStream());
 
-                    out.write("set:speakerInProj=1;");
+                    out.write("set:projectorOff=1;");
                     out.close();
                     BufferedReader in = new BufferedReader(
                             new InputStreamReader(con.getInputStream()));
@@ -835,7 +850,7 @@ public class MainActivity extends AppCompatActivity {
                 try{
                     Log.e("Owen", "LF");
 
-                    String url = "http://owenserver.us.to:23654";
+                    String url = "http://100.35.205.75:23655";
                     StrictMode.ThreadPolicy policy = new
                             StrictMode.ThreadPolicy.Builder()
                             .permitAll().build();
@@ -844,12 +859,13 @@ public class MainActivity extends AppCompatActivity {
                     URL myurl = new URL(url);
                     con = (HttpURLConnection) myurl.openConnection();
                     con.setDoOutput(true);
+                    con.setRequestProperty("phono" , "1");
                     con.setRequestMethod("POST");
 
                     OutputStreamWriter out = new OutputStreamWriter(
                             con.getOutputStream());
 
-                    out.write("set:speakerInPhono=1;");
+                    out.write("nan");
                     out.close();
                     BufferedReader in = new BufferedReader(
                             new InputStreamReader(con.getInputStream()));
@@ -880,7 +896,7 @@ public class MainActivity extends AppCompatActivity {
                 try{
                     Log.e("Owen", "LF");
 
-                    String url = "http://owenserver.us.to:23654";
+                    String url = "http://100.35.205.75:23655";
                     StrictMode.ThreadPolicy policy = new
                             StrictMode.ThreadPolicy.Builder()
                             .permitAll().build();
@@ -889,6 +905,7 @@ public class MainActivity extends AppCompatActivity {
                     URL myurl = new URL(url);
                     con = (HttpURLConnection) myurl.openConnection();
                     con.setDoOutput(true);
+                    con.setRequestProperty("volumeUp2" , "1");
                     con.setRequestMethod("POST");
 
                     OutputStreamWriter out = new OutputStreamWriter(
@@ -925,7 +942,7 @@ public class MainActivity extends AppCompatActivity {
                 try{
                     Log.e("Owen", "LF");
 
-                    String url = "http://owenserver.us.to:23654";
+                    String url = "http://100.35.205.75:23655";
                     StrictMode.ThreadPolicy policy = new
                             StrictMode.ThreadPolicy.Builder()
                             .permitAll().build();
@@ -934,6 +951,7 @@ public class MainActivity extends AppCompatActivity {
                     URL myurl = new URL(url);
                     con = (HttpURLConnection) myurl.openConnection();
                     con.setDoOutput(true);
+                    con.setRequestProperty("volumeDown2" , "1");
                     con.setRequestMethod("POST");
 
                     OutputStreamWriter out = new OutputStreamWriter(
@@ -970,7 +988,7 @@ public class MainActivity extends AppCompatActivity {
                 try{
                     Log.e("Owen", "LF");
 
-                    String url = "http://owenserver.us.to:23654";
+                    String url = "http://100.35.205.75:23655";
                     StrictMode.ThreadPolicy policy = new
                             StrictMode.ThreadPolicy.Builder()
                             .permitAll().build();
@@ -979,6 +997,7 @@ public class MainActivity extends AppCompatActivity {
                     URL myurl = new URL(url);
                     con = (HttpURLConnection) myurl.openConnection();
                     con.setDoOutput(true);
+                    con.setRequestProperty("openBlinds" , "1");
                     con.setRequestMethod("POST");
 
                     OutputStreamWriter out = new OutputStreamWriter(
@@ -1015,7 +1034,7 @@ public class MainActivity extends AppCompatActivity {
                 try{
                     Log.e("Owen", "LF");
 
-                    String url = "http://owenserver.us.to:23654";
+                    String url = "http://100.35.205.75:23655";
                     StrictMode.ThreadPolicy policy = new
                             StrictMode.ThreadPolicy.Builder()
                             .permitAll().build();
@@ -1024,6 +1043,7 @@ public class MainActivity extends AppCompatActivity {
                     URL myurl = new URL(url);
                     con = (HttpURLConnection) myurl.openConnection();
                     con.setDoOutput(true);
+                    con.setRequestProperty("closeBlinds" , "1");
                     con.setRequestMethod("POST");
 
                     OutputStreamWriter out = new OutputStreamWriter(

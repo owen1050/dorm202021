@@ -78,7 +78,7 @@ public class widget extends AppWidgetProvider {
                 text = "new";
                 Log.e("Owen", "ob");
 
-                String url = "http://owenserver.us.to:23654";
+                String url = "http://owenserver.us.to:23655";
                 StrictMode.ThreadPolicy policy = new
                         StrictMode.ThreadPolicy.Builder()
                         .permitAll().build();
@@ -88,6 +88,7 @@ public class widget extends AppWidgetProvider {
                 URL myurl = new URL(url);
                 con = (HttpURLConnection) myurl.openConnection();
                 con.setDoOutput(true);
+                con.setRequestProperty("openBlinds" , "1");
                 con.setRequestMethod("POST");
 
                 OutputStreamWriter out = new OutputStreamWriter(
@@ -101,7 +102,7 @@ public class widget extends AppWidgetProvider {
                 text = "new";
                 Log.e("Owen", "cb");
 
-                String url = "http://owenserver.us.to:23654";
+                String url = "http://owenserver.us.to:23655";
                 StrictMode.ThreadPolicy policy = new
                         StrictMode.ThreadPolicy.Builder()
                         .permitAll().build();
@@ -111,6 +112,7 @@ public class widget extends AppWidgetProvider {
                 URL myurl = new URL(url);
                 con = (HttpURLConnection) myurl.openConnection();
                 con.setDoOutput(true);
+                con.setRequestProperty("closeBlinds" , "1");
                 con.setRequestMethod("POST");
 
                 OutputStreamWriter out = new OutputStreamWriter(
@@ -124,7 +126,7 @@ public class widget extends AppWidgetProvider {
                 text = "new";
                 Log.e("Owen", "LO");
 
-                String url = "http://owenserver.us.to:23654";
+                String url = "http://owenserver.us.to:23655";
                 StrictMode.ThreadPolicy policy = new
                         StrictMode.ThreadPolicy.Builder()
                         .permitAll().build();
@@ -134,6 +136,7 @@ public class widget extends AppWidgetProvider {
                 URL myurl = new URL(url);
                 con = (HttpURLConnection) myurl.openConnection();
                 con.setDoOutput(true);
+                con.setRequestProperty("lightsOn" , "1");
                 con.setRequestMethod("POST");
 
                 OutputStreamWriter out = new OutputStreamWriter(
@@ -147,7 +150,7 @@ public class widget extends AppWidgetProvider {
                 text = "new";
                 Log.e("Owen", "LF");
 
-                String url = "http://owenserver.us.to:23654";
+                String url = "http://owenserver.us.to:23655";
                 StrictMode.ThreadPolicy policy = new
                         StrictMode.ThreadPolicy.Builder()
                         .permitAll().build();
@@ -157,6 +160,7 @@ public class widget extends AppWidgetProvider {
                 URL myurl = new URL(url);
                 con = (HttpURLConnection) myurl.openConnection();
                 con.setDoOutput(true);
+                con.setRequestProperty("lightsOff" , "1");
                 con.setRequestMethod("POST");
 
                 OutputStreamWriter out = new OutputStreamWriter(

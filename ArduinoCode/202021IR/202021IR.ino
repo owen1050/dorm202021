@@ -41,7 +41,7 @@ unsigned long updateT = millis();
 
 void handleRoot() {
   server.send(200, "text/plain", "IRAlive");
-  Serial.println("AliveCheckedByLocal");
+  //Serial.println("AliveCheckedByLocal");
 }
 
 void handleNotFound() {  
@@ -83,25 +83,25 @@ void setup() {
   server.on("/volumeUp2", []() {
     Serial.println("volumeUp2");
     server.send(200, "text/plain", "volumeUp2");
-    volumeUp = 2;
+    volumeUp = volumeUp + 2;
   });
 
   server.on("/volumeDown2", []() {
     Serial.println("volumeDown2");
     server.send(200, "text/plain", "volumeDown2");
-    volumeDown = 2;
+    volumeDown = volumeDown + 2;
   });
 
   server.on("/volumeUp5", []() {
     Serial.println("volumeUp5");
     server.send(200, "text/plain", "volumeUp5");
-    volumeUp = 5;
+    volumeUp = volumeUp + 5;
   });
 
   server.on("/volumeDown5", []() {
     Serial.println("volumeDown5");
     server.send(200, "text/plain", "volumeDown5");
-    volumeDown = 5;
+    volumeDown = volumeDown + 5;
   });
 
   server.on("/auxOne", []() {
@@ -144,7 +144,7 @@ void loop() {
   MDNS.update();
   if(millis() - updateT > 1000)
   {
-    Serial.println("Alive");
+    //Serial.println("Alive");
     updateT = millis();
   }
   irBlast = false;
