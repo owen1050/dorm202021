@@ -1,9 +1,9 @@
-Add rest of arduino
+fix spamming break
 implimnet blinds partially
-finish IR implemnetation
-Time based execution
-IFTTT Google 
 Logging
+
+IFTTT Google 
+
 Maybe make error reporting less frequent
 
 
