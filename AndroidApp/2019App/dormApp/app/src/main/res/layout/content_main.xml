@@ -51,7 +51,7 @@
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="TV On"
+        android:text="Stop Blinds"
         app:layout_constraintStart_toEndOf="@+id/hallOnButton"
         app:layout_constraintTop_toBottomOf="@+id/mainOffButton" />
 

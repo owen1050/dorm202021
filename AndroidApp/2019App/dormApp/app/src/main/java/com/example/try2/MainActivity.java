@@ -673,6 +673,7 @@ public class MainActivity extends AppCompatActivity {
                     URL myurl = new URL(url);
                     con = (HttpURLConnection) myurl.openConnection();
                     con.setDoOutput(true);
+                    con.setRequestProperty("stopBlinds" , "1");
                     con.setRequestMethod("POST");
 
                     OutputStreamWriter out = new OutputStreamWriter(
