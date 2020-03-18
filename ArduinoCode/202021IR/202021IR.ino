@@ -41,7 +41,7 @@ unsigned long updateT = millis();
 
 void handleRoot() {
   server.send(200, "text/plain", "IRAlive");
-  //Serial.println("AliveCheckedByLocal");
+  Serial.println("AliveCheckedByLocal");
 }
 
 void handleNotFound() {  

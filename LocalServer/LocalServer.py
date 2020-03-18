@@ -5,9 +5,9 @@ states = {"remoteServerOn" : 1, "lightsOn" :0, "lightsOff" : 0, "mainOn" : 0, "m
 lastCheckin = time.time()
 remoteServerError = False
 remoteUrl = "http://100.35.205.75:23655"
-lightUrl = "http://192.168.212.122/"
+lightUrl = "http://192.168.212.124/"
 blindsUrl = "http://192.168.212.122/"
-IRUrl = "http://192.168.212.122/"
+IRUrl = "http://192.168.212.125/"
 iftttErrorURL = "https://maker.ifttt.com/trigger/dormError/with/key/Bf91G_MsjKUzsWqRs5N7n"
 lastError = 20
 

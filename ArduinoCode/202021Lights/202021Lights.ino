@@ -17,17 +17,17 @@ int hallState = 0;
 unsigned long mainTime = 0;
 unsigned long hallTime = 0;
 
-int hallPosOff = 120;
-int hallPosOn = 50;
+int hallPosOff = 50;
+int hallPosOn = 130;
 int hallPosN = (int)((hallPosOn + hallPosOff)/2);
-int mainPosOff = 20;
-int mainPosOn = 94;
+int mainPosOff = 95;
+int mainPosOn = 15;
 int mainPosN = (int)((mainPosOn + mainPosOff)/2);
 int hallPos = 0;
 int mainPos = 0;
 
-int hallPin = 5;
-int mainPin = 3;
+int hallPin = D7;
+int mainPin = D5;
 
 void handleRoot() {
   server.send(200, "text/plain", "lightsAlive");

@@ -25,6 +25,7 @@ int motorValue = 0;
 int motorUpValue = 500;
 int motorDownValue = 1500;
 int motorStayValue = 1000;
+int offCounter = 0;
 
 void ICACHE_RAM_ATTR runPWM() {
   if(motorValue != motorStayValue)
@@ -151,10 +152,6 @@ void test(){
   if(firstDown)
   {
     blindState = 3;
-<<<<<<< HEAD
-    firstDown = false;
-=======
->>>>>>> 289cdf882500766da1c778a53e5ee6c5f1c63d71
   }
 
   if(blindState == 3)
@@ -162,10 +159,16 @@ void test(){
     if(!digitalRead(switchPin))
     {
       motorValue = motorUpValue;
+      offCounter = 0;
     }
     else
     {
+      offCounter++;
+    }
+    if(offCounter > 10)
+    {
       blindState = 0;
+      firstDown = false;
     }
   }
   
@@ -173,11 +176,4 @@ void test(){
   {
     motorValue = motorStayValue;
   }
-<<<<<<< HEAD
-=======
-  
-  Serial.println(motorValue);
-  delay(50);
-
->>>>>>> 289cdf882500766da1c778a53e5ee6c5f1c63d71
 }
