@@ -1,7 +1,7 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import time, threading, requests
 
-states = {"remoteServerOn" : 1, "lightsOn" :0, "lightsOff" : 0, "mainOn" : 0, "mainOff" : 0 ,"hallOn" : 0, "hallOff" : 0, "mainOnHallOff":0, "mainOffHallOn" :0, "projectorOn" :0,"projectorOff" :0,"volumeUp2" :0,"volumeDown2" :0,"volumeUp5" :0,"volumeDown5" :0,"auxOne" :0,"auxTwo" :0,"phono" :0,"mute" :0,"cd" :0,"openBlinds" :0,"closeBlinds" :0}
+states = {"remoteServerOn" : 1, "lightsOn" :0, "lightsOff" : 0, "mainOn" : 0, "mainOff" : 0 ,"hallOn" : 0, "hallOff" : 0, "mainOnHallOff":0, "mainOffHallOn" :0, "projectorOn" :0,"projectorOff" :0,"volumeUp2" :0,"volumeDown2" :0,"volumeUp5" :0,"volumeDown5" :0,"auxOne" :0,"auxTwo" :0,"phono" :0,"mute" :0,"cd" :0,"openBlinds" :0,"closeBlinds" :0, "stopBlinds":0}
 lastCheckin = time.time()
 remoteServerError = False
 remoteUrl = "http://100.35.205.75:23655"
@@ -133,7 +133,7 @@ def getRemoteVars():
 						except Exception as e:
 							print(e)
 
-				blindArduinoPoss = ["openBlinds", "closeBlinds"]
+				blindArduinoPoss = ["openBlinds", "closeBlinds", "stopBlinds"]
 				for par in blindArduinoPoss:
 					if(states[par] == "1"):
 						try:
