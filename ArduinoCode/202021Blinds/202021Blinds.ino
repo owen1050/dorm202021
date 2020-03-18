@@ -151,7 +151,10 @@ void test(){
   if(firstDown)
   {
     blindState = 3;
+<<<<<<< HEAD
     firstDown = false;
+=======
+>>>>>>> 289cdf882500766da1c778a53e5ee6c5f1c63d71
   }
 
   if(blindState == 3)
@@ -170,4 +173,11 @@ void test(){
   {
     motorValue = motorStayValue;
   }
+<<<<<<< HEAD
+=======
+  
+  Serial.println(motorValue);
+  delay(50);
+
+>>>>>>> 289cdf882500766da1c778a53e5ee6c5f1c63d71
 }
