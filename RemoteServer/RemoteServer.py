@@ -51,11 +51,7 @@ class httpServer(BaseHTTPRequestHandler):
 
         if postReply == "":
             postReply = "ERROR"
-<<<<<<< HEAD
 
-=======
-            
->>>>>>> 11ef1ad23d46c58aa08ea1f4013b081f27713cd6
         self.wfile.write(str(postReply).encode())
 
         if(reboot):
