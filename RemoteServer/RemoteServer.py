@@ -21,6 +21,39 @@ class httpServer(BaseHTTPRequestHandler):
         self.wfile.write("TheRemoteServerIsUp".encode())
         lastCheckin = time.time()
         print("Get Request at:" + str(time.time()))
+
+        content_length = int(self.headers['Content-Length'])
+        data = self.rfile.read(content_length)
+
+        postReply = ""
+        reboot = False
+
+        if "RESET" in data:
+            postReply = "ResetAllVarsTo0"
+            print("Received POST for Reset at:" + str(time.time()))
+            for x in states:
+                states[x] = 0
+
+        if "REBOOT" in data:
+            print("Received POST for Reboot. Server Should be up in 3 minutes")
+            postReply = "Rebooting server please wait 3 minutes"
+            reboot = True
+
+        for x in states:
+            if self.headers[x] in data:
+                postReply = "Changed variable " + x + " to " + 1
+                print("received post for " + postReply)
+                states[x] = 1
+
+        if postReply == "":
+            postReply = "ERROR"
+            
+        self.wfile.write(str(postReply).encode())
+
+        if(reboot):
+            passw = "adminadmin"
+            com = "reboot"
+            p = os.system("echo %s|sudo -S %s" %(passw, com))
         
     def do_POST(self):
         self.send_response(200)
@@ -28,6 +61,7 @@ class httpServer(BaseHTTPRequestHandler):
         self.end_headers()
         postReply = ""
         reboot = False
+
         if self.headers["RESET"] is not None:
             postReply = "ResetAllVarsTo0"
             print("Received POST for Reset at:" + str(time.time()))
