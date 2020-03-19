@@ -21,18 +21,13 @@ class httpServer(BaseHTTPRequestHandler):
         self.wfile.write("TheRemoteServerIsUp".encode())
         lastCheckin = time.time()
         print("Get Request at:" + str(time.time()))
-<<<<<<< HEAD
+
         data = "nan"
         try:
             content_length = int(self.headers['Content-Length'])
             data = self.rfile.read(content_length)
         except:
             pass
-=======
-
-        content_length = int(self.headers['Content-Length'])
-        data = self.rfile.read(content_length)
->>>>>>> 11ef1ad23d46c58aa08ea1f4013b081f27713cd6
 
         postReply = ""
         reboot = False
