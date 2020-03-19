@@ -1,11 +1,5 @@
 fix spamming break
-implimnet blinds partially
 Logging
-
 IFTTT Google 
 
 Maybe make error reporting less frequent
-
-
-before area duty, ensure all parts are available to swap. 
-test test test then switch over. Goal code done before area duty, switch over during area duty

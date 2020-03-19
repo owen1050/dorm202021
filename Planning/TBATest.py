@@ -1,4 +1,7 @@
-import tbapy
-
-tba = tbapy.TBA("5fJJncsCUyyI7z0jgo6k1HPKQypRoM5FuxwAqCr0PBBFmA9onMqLZG7027GfDum8")
-print(tba.status())
+states = {"remoteServerOn" : 1, "lightsOn" :0, "lightsOff" : 0, "mainOn" : 0}
+states2 = {"remoteServerOff" : 1, "lights2" :0, "lights2" : 0, "main2" : 0}
+states3 = states2.update(states)
+for i in states:
+	print(i)
+	if "li" in i:
+		print("GGG")
