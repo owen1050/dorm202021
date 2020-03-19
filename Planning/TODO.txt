@@ -1,5 +1,5 @@
 fix spamming break
 Logging
-IFTTT Google 
+schedule
 
 Maybe make error reporting less frequent
