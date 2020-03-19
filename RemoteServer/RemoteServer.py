@@ -18,7 +18,7 @@ class httpServer(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header("content-type", "text/plain")
         self.end_headers()
-        self.wfile.write("TheRemoteServerIsUp".encode())
+        
         lastCheckin = time.time()
         print("Get Request at:" + str(time.time()))
 
@@ -54,12 +54,12 @@ class httpServer(BaseHTTPRequestHandler):
         if postReply == "":
             postReply = "ERROR"
 
-        self.wfile.write(str(postReply).encode())
-
         if(reboot):
             passw = "adminadmin"
             com = "reboot"
             p = os.system("echo %s|sudo -S %s" %(passw, com))
+
+        self.wfile.write("your Request has been processed".encode())
         
     def do_POST(self):
         self.send_response(200)
