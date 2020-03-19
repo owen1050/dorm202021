@@ -25,7 +25,9 @@ class httpServer(BaseHTTPRequestHandler):
         data = "nan"
         try:
             content_length = int(self.headers['Content-Length'])
-            data = self.rfile.read(content_length)
+            print(content_length)
+            data = str(self.rfile.read(content_length))
+            print(data)
         except:
             pass
 
@@ -44,8 +46,8 @@ class httpServer(BaseHTTPRequestHandler):
             reboot = True
 
         for x in states:
-            if self.headers[x] in data:
-                postReply = "Changed variable " + x + " to " + 1
+            if x in data:
+                postReply = "Changed variable " + x + " to 1"
                 print("received post for " + postReply)
                 states[x] = 1
 
