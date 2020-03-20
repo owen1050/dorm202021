@@ -1,5 +1,6 @@
 fix spamming break
 Logging
 schedule
+when arduino turn on ifttt with ip, maybe even tell server wgat ip to use
 
 Maybe make error reporting less frequent
