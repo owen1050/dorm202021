@@ -126,7 +126,8 @@ public class widget extends AppWidgetProvider {
                 text = "new";
                 Log.e("Owen", "LO");
 
-                String url = "http://owenserver.us.to:23655";
+                //String url = "http://owenserver.us.to:23655";
+                String url = "https://maker.ifttt.com/trigger/basementLightsOn/with/key/Bf91G_MsjKUzsWqRs5N7n";
                 StrictMode.ThreadPolicy policy = new
                         StrictMode.ThreadPolicy.Builder()
                         .permitAll().build();
@@ -150,7 +151,8 @@ public class widget extends AppWidgetProvider {
                 text = "new";
                 Log.e("Owen", "LF");
 
-                String url = "http://owenserver.us.to:23655";
+                //String url = "http://owenserver.us.to:23655";
+                String url = "https://maker.ifttt.com/trigger/basementLightsOff/with/key/Bf91G_MsjKUzsWqRs5N7n";
                 StrictMode.ThreadPolicy policy = new
                         StrictMode.ThreadPolicy.Builder()
                         .permitAll().build();
